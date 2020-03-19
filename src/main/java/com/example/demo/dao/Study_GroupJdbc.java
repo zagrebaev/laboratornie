@@ -6,6 +6,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+
+import java.util.List;
+
+import java.util.Map;
 
 @Repository
 public class Study_GroupJdbc {
@@ -15,6 +20,10 @@ public class Study_GroupJdbc {
 
     public Study_Group get(int id){
         return jdbcTemplate.queryForObject("SELECT * FROM study_group WHERE id = ?", this::mapStudy_Group, id);
+    }
+
+    public List<Study_Group>getAll(){
+        return jdbcTemplate.query("SELECT * FROM study_group", this::mapStudy_Group);
     }
 
     public Study_Group add(int id, String name){

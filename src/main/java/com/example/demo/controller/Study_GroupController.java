@@ -6,7 +6,7 @@ import com.example.demo.dao.Study_GroupJdbc;
 import com.example.demo.model.Study_Group;
 import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 import java.awt.*;
 
 @RestController
@@ -21,6 +21,13 @@ public class Study_GroupController {
     public Study_Group getStudy_group(@PathVariable int id){
         Study_Group study_group = study_groupJdbc.get(id);
         return study_group;
+    }
+
+    @GetMapping("/study_group/all")
+    public List<Study_Group> getStudy_groups() {
+
+        return study_groupJdbc.getAll();
+
     }
 
 

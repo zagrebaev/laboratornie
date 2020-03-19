@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class StudentJdbc {
@@ -15,6 +16,21 @@ public class StudentJdbc {
 
     public Student get(int id){
         return jdbcTemplate.queryForObject("SELECT * FROM student WHERE id = ?", this::mapStudent, id);
+    }
+
+    public List<Student> getAll(){
+        return jdbcTemplate.query("SELECT * FROM student", this::mapStudent);
+    }
+
+    public List<Student> getAllByStudyGroup(int studyGroupId) {
+        return jdbcTemplate.query(
+                "SELECT student.id, surname, student.name, second_name, study_group_id, study_group.name " +
+                        "AS study_group " +
+                        "FROM student INNER JOIN study_group ON student.study_group_id = study_group.id " +
+                        "WHERE study_group_id = ?",
+                this::mapStudent,
+                studyGroupId
+        );
     }
 
     public String add(String surname, String name, String second_name, int study_group_id){
@@ -44,4 +60,6 @@ public class StudentJdbc {
     public Student search(String student){
         return jdbcTemplate.queryForObject("SELECT * FROM student WHERE name = ?", Student.class, student);
     }
+
+
 }
