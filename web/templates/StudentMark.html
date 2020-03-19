@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Оценки студентов</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<table align="center">
+    <tr>
+        <th>ID студента</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Оценка</th>
+    </tr>
+    {% for rec in records %}
+    <tr>
+        <td>{{rec.sid}}</td>
+        <td>{{rec.surname}}</td>
+        <td>{{rec.name}}</td>
+        {% if rec.mid >= 4 %}
+            <td bgcolor=red>{{rec.mark}}</td>
+        {% else %}
+            <td>{{rec.mark}}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
