@@ -22,9 +22,9 @@ public class StudyPlanJdbc
 
     public List<StudyPlan> get()
     {
-        return jdbcTemplate.queryForObject("SELECT sp.id, s.name, e.type FROM study_plan AS sp " +
-                "INNER JOIN subject AS s ON s.id = sp.subject_id " +
-                "INNER JOIN exam_type as e ON e.id = sp.exam_type_id", this::mapStudyPlanAll);
+        return jdbcTemplate.queryForObject("SELECT studplan.id, sub.name, extyp.type FROM study_plan AS studplan " +
+                "INNER JOIN subject AS sub ON sub.id = studplan.subject_id " +
+                "INNER JOIN exam_type as extyp ON extyp.id = studplan.exam_type_id", this::mapStudyPlanAll);
     }
 
     private List<StudyPlan> mapStudyPlanAll(ResultSet rs, int i) throws SQLException

@@ -21,9 +21,9 @@ public class StudentMarkJdbc {
 
     public List<StudentMark> get(){
         return jdbcTemplate.queryForObject("SELECT s.id AS s_id, s.surname, s.name, s.second_name, m.id AS m_id, m.name AS mark_name " +
-                "FROM journal AS j\n" +
+                "FROM journal AS jour\n" +
                 "INNER JOIN student AS s ON j.student_id = s.id\n" +
-                "INNER JOIN mark AS m ON j.mark_id = m.id", this::mapAllStudentMark);
+                "INNER JOIN mark AS m ON jour.mark_id = m.id", this::mapAllStudentMark);
     }
 
     private List<StudentMark> mapAllStudentMark(ResultSet rs, int i) throws SQLException
